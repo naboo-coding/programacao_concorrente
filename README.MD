@@ -26,6 +26,35 @@
 python parte1-filosofos/filosofos_ingenuo.py
 python parte1-filosofos/filosofos_corrigido.py
 ```
+## Perguntas e respostas: Jantar dos Filósofos
+
+### 1. O que é o problema do Jantar dos Filósofos?
+É um problema clássico de concorrência: cinco filósofos alternam entre pensar e comer, e o desafio é fazer todos comerem sem o programa travar
+
+### 2. Como funciona a dinâmica dos cinco filósofos e dos cinco garfos?
+Há um garfo entre cada par de filósofos e para comer, o filósofo precisa dos dois garfos ao lado dele. Depois de comer, devolve os garfos. No código, cada filósofo é uma thread e cada garfo é um Lock
+
+### 3. O que é deadlock?
+É quando as threads ficam esperando umas pelas outras para sempre, e o programa trava
+
+### 4. Por que o protocolo ingênuo pode causar deadlock?
+Porque todos pegam primeiro o garfo esquerdo e se os cinco pegarem ao mesmo tempo, cada um espera o garfo do vizinho, e ninguém consegue comer
+
+### 5. Quais são as quatro condições de Coffman?
+1. **Exclusão mútua:** um garfo só pode ser usado por um filósofo por vez.
+2. **Posse e espera:** o filósofo segura um garfo enquanto espera o outro
+3. **Sem preempção:** ninguém tira o garfo de quem está com ele
+4. **Espera circular:** os filósofos formam um ciclo, cada um esperando o garfo do próximo
+
+### 6. Qual estratégia foi utilizada para evitar o deadlock?
+Ordenação de recursos: os garfos são numerados e todo filósofo pega primeiro o garfo de menor número
+
+### 7. Qual condição de coffman foi eliminada pela estratégia escolhida?
+a **espera circular**. Com todos seguindo a mesma ordem, o ciclo não consegue se formar
+
+### 8. Como a solução garante que todos os filósofos tenham oportunidade de comer, evitando inanição?
+A ordenação evita o deadlock, então sempre alguém consegue comer e o programa não para. Ela não garante formalmente que nenhum filósofo fique sem comer, mas na prática isso é raro, porque os garfos são liberados rapidamente e o tempo de pensar é aleatório. Nas nossas execuções, todos comeram várias vezes
+
 
 ## *PARTE 2 - SEMÁFORO:*
 **Versão 1:**

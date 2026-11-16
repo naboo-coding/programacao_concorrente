@@ -26,35 +26,6 @@
 python parte1-filosofos/filosofos_ingenuo.py
 python parte1-filosofos/filosofos_corrigido.py
 ```
-## Perguntas e respostas: Jantar dos Filósofos
-
-### 1. O que é o problema do Jantar dos Filósofos?
-É um problema clássico de concorrência: cinco filósofos alternam entre pensar e comer, e o desafio é fazer todos comerem sem o programa travar
-
-### 2. Como funciona a dinâmica dos cinco filósofos e dos cinco garfos?
-Há um garfo entre cada par de filósofos e para comer, o filósofo precisa dos dois garfos ao lado dele. Depois de comer, devolve os garfos. No código, cada filósofo é uma thread e cada garfo é um Lock
-
-### 3. O que é deadlock?
-É quando as threads ficam esperando umas pelas outras para sempre, e o programa trava
-
-### 4. Por que o protocolo ingênuo pode causar deadlock?
-Porque todos pegam primeiro o garfo esquerdo e se os cinco pegarem ao mesmo tempo, cada um espera o garfo do vizinho, e ninguém consegue comer
-
-### 5. Quais são as quatro condições de Coffman?
-1. **Exclusão mútua:** um garfo só pode ser usado por um filósofo por vez.
-2. **Posse e espera:** o filósofo segura um garfo enquanto espera o outro
-3. **Sem preempção:** ninguém tira o garfo de quem está com ele
-4. **Espera circular:** os filósofos formam um ciclo, cada um esperando o garfo do próximo
-
-### 6. Qual estratégia foi utilizada para evitar o deadlock?
-Ordenação de recursos: os garfos são numerados e todo filósofo pega primeiro o garfo de menor número
-
-### 7. Qual condição de coffman foi eliminada pela estratégia escolhida?
-a **espera circular**. Com todos seguindo a mesma ordem, o ciclo não consegue se formar
-
-### 8. Como a solução garante que todos os filósofos tenham oportunidade de comer, evitando inanição?
-A ordenação evita o deadlock, então sempre alguém consegue comer e o programa não para. Ela não garante formalmente que nenhum filósofo fique sem comer, mas na prática isso é raro, porque os garfos são liberados rapidamente e o tempo de pensar é aleatório. Nas nossas execuções, todos comeram várias vezes
-
 
 ## *PARTE 2 - SEMÁFORO:*
 **Versão 1:**
@@ -69,6 +40,18 @@ A ordenação evita o deadlock, então sempre alguém consegue comer e o program
 ![alt text](parte2-semaforo/image.png)
 
 → Essa perda de incrementos ocorre porque como algumas tarefas acabamo rodando ao mesmo tempo, o computador não consegue calcular adequadamente essa quantidade de incrementos. Pois como não tem essa sincronização, uma tarefa atropela a outra, fazendo com que o computador ache que só foi uma tarefa ao inves de 2 ou mais, o que acaba gerando essa descrepancia entre o valor esperado e o obtido.
+# Discussão sobre sincronização com threads
+
+**Versão 2:**
+→ Por que a versão com semáforo é correta?:
+Na versão com semáforo, utilizamos "acquire()" e "release()" para controlar o acesso à variável compartilhada. Como o semáforo foi criado com valor 1, somente uma thread por vez consegue entrar na região crítica, que é a parte do código responsável por atualizar o contador. Assim, cada incremento acontece de forma controlada, evitando que uma thread sobrescreva o resultado de outra. Por isso, o resultado final esperado é de 1.600.000 incrementos.
+
+→ Trade-off de throughput:
+O uso do semáforo aumenta a segurança e a precisão do resultado, mas também pode diminuir o desempenho, isso acontece porque as threads precisam esperar sua vez para acessar a região crítica. Dessa forma, mesmo utilizando várias threads, os incrementos são realizados um de cada vez. Esse é o trade-off entre sincronização e throughput, ganhamos em consistência dos dados, mas podemos perder velocidade de execução devido a espera e a concorrência pelo semáforo.
+
+→ Visibilidade e ordenação:
+
+O mecanismo de sincronização em python ajuda a garantir a visibilidade e ordenação. No nosso código, as operações "acquire()" e "release()" do semáforo controlam o acesso ao contador e ajudam a garantir que uma thread acesse o valor atualizado depois que outra terminar sua alteração. Assim, evitamos problemas de concorrência e mantemos o resultado correto.
 
 ## *PARTE 3 - DEADLOCK:*
 
@@ -88,3 +71,4 @@ python parte3-deadlock/deadlock_corrigido.py
 A versão travada não termina, para parar é só fechar o terminal.
 
 ## *LINK DO VÍDEO:*
+

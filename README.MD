@@ -11,6 +11,22 @@
 
 ## *PARTE 1 - JANTAR DOS FILÓSOFOS:*
 
+**Print 1: deadlock.** Os cinco filósofos seguram o garfo esquerdo e nenhum consegue o direito.
+
+![Deadlock nos filósofos](parte1-filosofos/deadlock-filosofos.png)
+
+**Print 2: execução sem interrupção.** Com a ordenação dos garfos, os filósofos comem repetidamente até o fim, sem travar.
+
+![Execução sem deadlock](parte1-filosofos/deadlock-corrigido.png)
+
+
+### Como executar
+
+```bash
+python parte1-filosofos/filosofos_ingenuo.py
+python parte1-filosofos/filosofos_corrigido.py
+```
+
 ## *PARTE 2 - SEMÁFORO:*
 **Versão 1:**
 - Sem sincronização das tarefas e com perda significativa de incrementos

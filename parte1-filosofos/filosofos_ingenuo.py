@@ -23,7 +23,7 @@ def filosofo(id):
         garfos[direita].acquire()
         print(f"Filósofo {id} pegou o garfo direito")
 
-        print(f"Filósofo {id} está COMENDO")
+        print(f"Filósofo {id} está comendo")
         time.sleep(random.uniform(0.5, 1.0))
 
         garfos[direita].release()

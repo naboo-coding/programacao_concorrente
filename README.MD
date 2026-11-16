@@ -10,17 +10,22 @@
 - Python
 
 ## *PARTE 1 - JANTAR DOS FILÓSOFOS:*
-O Jantar dos Filósofos modela cinco filósofos sentados em uma mesa circular, alternando
-entre pensar e comer, onde para comer cada filósofo precisa dos dois garfos à sua
-esquerda e direita, compartilhados com os vizinhos, expondo problemas clássicos de
-exclusão mútua, impasse e inanição em sistemas concorrentes.
-Um impasse ocorre se todos pegarem simultaneamente o garfo da esquerda e aguardarem
-o da direita, pois ninguém progride e todos esperam indefinidamente, caracterizando
-deadlock no protocolo ingênuo de “pegar primeiro um garfo, depois o outro”.
-Soluções gerais exigem negar pelo menos uma das quatro condições necessárias para
-deadlock — exclusão mútua, manter-e-esperar, não preempção e espera circular — sendo
-comum eliminar a espera circular por meio de hierarquia de recursos, usar um árbitro
-(garçom) ou limitar a N−1 filósofos ativos.
+
+**Print 1: deadlock.** Os cinco filósofos seguram o garfo esquerdo e nenhum consegue o direito.
+
+![Deadlock nos filósofos](parte1-filosofos/deadlock-filosofos.png)
+
+**Print 2: execução sem interrupção.** Com a ordenação dos garfos, os filósofos comem repetidamente até o fim, sem travar.
+
+![Execução sem deadlock](parte1-filosofos/deadlock-corrigido.png)
+
+
+### Como executar
+
+```bash
+python parte1-filosofos/filosofos_ingenuo.py
+python parte1-filosofos/filosofos_ordenado.py
+```
 
 ## *PARTE 2 - SEMÁFORO:*
 **Versão 1:**

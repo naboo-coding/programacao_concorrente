@@ -24,7 +24,7 @@
 
 ```bash
 python parte1-filosofos/filosofos_ingenuo.py
-python parte1-filosofos/filosofos_ordenado.py
+python parte1-filosofos/filosofos_corrigido.py
 ```
 
 ## *PARTE 2 - SEMÁFORO:*
